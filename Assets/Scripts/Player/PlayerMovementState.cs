@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovementState : PlayerState
 {
-    public PlayerMovementState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerMovementState(Player player, PlayerStateMachine stateMachine, string animBoolName)
+        : base(player, stateMachine, animBoolName)
     {
     }
 
@@ -21,13 +21,33 @@ public class PlayerMovementState : PlayerState
     {
         base.Update();
 
-        if (Keyboard.current.aKey.isPressed)
+        Vector2 input = player.InputHandler.MoveInput;
+
+        FlipCharacter(input.x);
+
+        player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed, player.RB.linearVelocity.y);
+
+        //if (player.InputHandler.JumpPressed)
+        //{
+        //    stateMachine.changeState(player.JumpState);
+        //}
+
+        if (input.x == 0)
         {
-            Debug.Log("press a");
-
-            stateMachine.changeState(player.IdelState);
-            Debug.Log("press a2");
-
+            stateMachine.changeState(player.IdleState);
         }
     }
+
+    private void FlipCharacter(float horizontalInput)
+    {
+        if (horizontalInput < 0)
+        {
+            player.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (horizontalInput > 0)
+        {
+            player.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
 }

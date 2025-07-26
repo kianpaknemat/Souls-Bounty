@@ -20,9 +20,14 @@ public class PlayerIdelState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (Keyboard.current.dKey.isPressed)
+
+        Vector2 input = player.InputHandler.MoveInput;
+
+        if (input.x != 0)
         {
             stateMachine.changeState(player.MovementState);
         }
     }
+
+
 }

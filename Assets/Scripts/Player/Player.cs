@@ -2,40 +2,45 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region component
-    public Animator anim {  get; private set; }
-
-
+    #region Components
+    public Animator Anim { get; private set; }
     #endregion
 
-
-    #region state
-
-    public PlayerStateMachine StateMachine {  get; private set; }
-    public PlayerIdelState IdelState { get; private set; }
+    #region States
+    public PlayerStateMachine StateMachine { get; private set; }
+    public PlayerIdelState IdleState { get; private set; } // Fixed spelling
     public PlayerMovementState MovementState { get; private set; }
+    #endregion
 
+    #region Movement
+    public Rigidbody2D RB { get; private set; }
+    public PlayerInputHandler InputHandler { get; private set; }
+
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+
+    public float MoveSpeed => moveSpeed;
+    public float JumpForce => jumpForce;
     #endregion
 
     private void Awake()
     {
-        StateMachine = new PlayerStateMachine();
-        IdelState = new PlayerIdelState(this,StateMachine,"Idel");
-        MovementState = new PlayerMovementState(this,StateMachine,"Move");
+        RB = GetComponent<Rigidbody2D>();
+        InputHandler = GetComponent<PlayerInputHandler>();
+        Anim = GetComponentInChildren<Animator>();
     }
-
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        StateMachine = new PlayerStateMachine();
+        IdleState = new PlayerIdelState(this, StateMachine, "Idel");
+        MovementState = new PlayerMovementState(this, StateMachine, "Move");
 
-        StateMachine.initialize(IdelState);
+        StateMachine.initialize(IdleState); 
     }
 
     private void Update()
     {
         StateMachine.currentState.Update();
     }
-    
-
 }
