@@ -1,33 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerIdelState : PlayerState
+public class PlayerIdleState : PlayerState
 {
-    public PlayerIdelState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string animBoolName)
+        : base(player, stateMachine, animBoolName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
+        player.RB.linearVelocity = new Vector2(0, player.RB.linearVelocity.y);
     }
 
     public override void Update()
     {
         base.Update();
-
-        Vector2 input = player.InputHandler.MoveInput;
-
-        if (input.x != 0)
-        {
-            stateMachine.changeState(player.MovementState);
-        }
+        
     }
-
-
 }

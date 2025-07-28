@@ -18,6 +18,8 @@ public class PlayerState
     {
         player.Anim.SetBool(animBoolName, true);
     }
+    public virtual void PhysicsUpdate() { }
+
 
     public virtual void Update()
     {

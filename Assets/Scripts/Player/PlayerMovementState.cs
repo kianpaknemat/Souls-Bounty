@@ -12,11 +12,6 @@ public class PlayerMovementState : PlayerState
         base.Enter();
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void Update()
     {
         base.Update();
@@ -25,29 +20,14 @@ public class PlayerMovementState : PlayerState
 
         FlipCharacter(input.x);
 
-        player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed, player.RB.linearVelocity.y);
-
-        //if (player.InputHandler.JumpPressed)
-        //{
-        //    stateMachine.changeState(player.JumpState);
-        //}
-
-        if (input.x == 0)
-        {
-            stateMachine.changeState(player.IdleState);
-        }
+        player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed , player.RB.linearVelocity.y);
     }
 
     private void FlipCharacter(float horizontalInput)
     {
         if (horizontalInput < 0)
-        {
             player.transform.localScale = new Vector3(-1, 1, 1);
-        }
         else if (horizontalInput > 0)
-        {
             player.transform.localScale = new Vector3(1, 1, 1);
-        }
     }
-
 }
