@@ -16,48 +16,80 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Movement
+    [Header("movement")]
     public Rigidbody2D RB { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
+    public PlayerDashState dashState { get; private set; }
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
 
+    [SerializeField] public float dashSpeed = 10f;
+    [SerializeField] public float dashDuration = 10f;
+
     public float MoveSpeed => moveSpeed;
     public float JumpForce => jumpForce;
+    #endregion
 
-    // For ground check
+    #region check
+    [Header("check wall & ground")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
-
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
+    public Transform wallCheck;
+    public float wallCheckRadius = 0.2f;
+    public LayerMask walldLayer;
+    public bool IsWall()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, walldLayer);
+    }
+    #endregion
+
+    #region time
+    [Header("Time")]
+    public float Timer;
+    public float coolDown = 5f;
+
     #endregion
 
     private void Awake()
     {
-        RB = GetComponent<Rigidbody2D>();
-        InputHandler = GetComponent<PlayerInputHandler>();
-        Anim = GetComponentInChildren<Animator>();
-    }
-
-    private void Start()
-    {
+        
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, "Idel");
         MovementState = new PlayerMovementState(this, StateMachine, "Move");
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         AirState = new PlayerAirState(this, StateMachine, "Jump");
-        GroundedState = new PlayerGroundedState(this, StateMachine, "Grounded");
+        dashState = new PlayerDashState(this, StateMachine, "Dash");
+
+
+        GroundedState = new PlayerGroundedState(this, StateMachine, "");
+
+    }
+
+    private void Start()
+    {
+        RB = GetComponent<Rigidbody2D>();
+        InputHandler = GetComponent<PlayerInputHandler>();
+        Anim = GetComponentInChildren<Animator>();
 
         StateMachine.initialize(GroundedState);
     }
 
+
     private void Update()
     {
         StateMachine.currentState.Update();
+        bool Dash = InputHandler.DashPressed;
+        Timer -= Time.deltaTime;
+        if (Timer < 0 && Dash)
+        {
+            Timer = coolDown;
+        }
     }
 }

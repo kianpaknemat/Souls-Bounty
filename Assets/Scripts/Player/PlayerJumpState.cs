@@ -13,10 +13,10 @@ public class PlayerJumpState : PlayerState
     {
         base.Enter();
         hasJumped = false;
-
         player.RB.linearVelocity = new Vector2(player.RB.linearVelocity.x, player.JumpForce);
         hasJumped = true;
     }
+
 
     public override void Update()
     {

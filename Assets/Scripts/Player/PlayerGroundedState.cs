@@ -26,25 +26,36 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
-        // اگر از زمین جدا شدی، برو AirState
         if (!player.IsGrounded())
         {
             stateMachine.changeState(player.AirState);
             return;
         }
 
-        // ورودی‌ها رو بخون
+
+        #region keyboard input
         Vector2 input = player.InputHandler.MoveInput;
         bool jump = player.InputHandler.JumpPressed;
+        bool Dash = player.InputHandler.DashPressed;
+        #endregion
 
-        // اگر دکمه پرش زده شده، برو JumpState
+
         if (jump)
         {
             SetSubState(player.JumpState);
             return;
         }
+        
+        if (Dash && player.Timer < 0)
+        {
+            player.Timer = player.coolDown;
+            stateMachine.changeState(player.dashState);
+            return;
+        }
 
-        // اگر ورودی حرکت داری، برو MovementState
+
+
+
         if (Mathf.Abs(input.x) > 0.1f)
         {
             SetSubState(player.MovementState);

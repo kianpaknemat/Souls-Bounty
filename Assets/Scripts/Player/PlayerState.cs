@@ -7,6 +7,7 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected Player player;
     private string animBoolName;
+    protected float stateTimer;
 
     public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
     {
@@ -16,20 +17,22 @@ public class PlayerState
     }
     public virtual void Enter()
     {
-        player.Anim.SetBool(animBoolName, true);
+        if (!string.IsNullOrEmpty(animBoolName))
+            player.Anim.SetBool(animBoolName, true);
     }
     public virtual void PhysicsUpdate() { }
 
 
     public virtual void Update()
     {
-        Debug.Log("im in " + animBoolName);
+        stateTimer -= Time.deltaTime;
     }
 
 
     public virtual void Exit()
     {
-        player.Anim.SetBool(animBoolName, false);
+        if (!string.IsNullOrEmpty(animBoolName))
+            player.Anim.SetBool(animBoolName, false);
     }
 
 
