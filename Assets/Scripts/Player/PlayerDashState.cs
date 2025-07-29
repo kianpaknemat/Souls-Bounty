@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerDashState : PlayerState
 {
@@ -14,12 +15,18 @@ public class PlayerDashState : PlayerState
         base.Enter();
 
         player.Anim.SetBool("Dash", true);
+        float dir = player.dashDir;
+        Vector2 input = player.InputHandler.MoveInput;
+        dir = input.x;
+        if (dir == 0)
+        {
+            float direction = player.transform.localScale.x;
+            dir = direction;
+        }
 
-        // تعیین جهت دش
-        float direction = player.transform.localScale.x;
-        dashDir = new Vector2(direction * player.dashSpeed, 0f);
+        dashDir = new Vector2(dir * player.dashSpeed, 0f);
 
-        // غیرفعال کردن گراویتی موقع دش (اختیاری ولی پیشنهاد میشه)
+
         player.RB.gravityScale = 0;
 
         stateTimer = player.dashDuration;
@@ -29,15 +36,14 @@ public class PlayerDashState : PlayerState
     {
         base.Update();
 
-        // اعمال سرعت ثابت در کل مدت دش
+
         player.RB.linearVelocity = dashDir;
 
-        // کم کردن زمان
+
         stateTimer -= Time.deltaTime;
 
         if (stateTimer <= 0f)
         {
-            // پایان دش → سوئیچ به استیت بعدی
             if (player.IsGrounded())
                 stateMachine.changeState(player.GroundedState);
             else
@@ -49,13 +55,12 @@ public class PlayerDashState : PlayerState
     {
         base.Exit();
 
-        // بازگردانی انیمیشن
+
         player.Anim.SetBool("Dash", false);
 
-        // بازگردانی گراویتی
+
         player.RB.gravityScale = 1;
 
-        // اختیاری: توقف کامل بعد دش
         player.RB.linearVelocity = new Vector2(0, player.RB.linearVelocity.y);
     }
 }

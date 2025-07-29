@@ -50,11 +50,10 @@ public class PlayerGroundedState : PlayerState
         {
             player.Timer = player.coolDown;
             stateMachine.changeState(player.dashState);
+
+            
             return;
         }
-
-
-
 
         if (Mathf.Abs(input.x) > 0.1f)
         {

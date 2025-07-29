@@ -13,13 +13,25 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
 
+
+        #region keyboard input
         Vector2 input = player.InputHandler.MoveInput;
         FlipCharacter(input.x);
         player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed, player.RB.linearVelocity.y);
+        bool Dash = player.InputHandler.DashPressed;
+#endregion
 
         if (player.IsGrounded())
         {
             stateMachine.changeState(player.GroundedState);
+        }
+
+
+        if (Dash && player.Timer < 0)
+        {
+            player.Timer = player.coolDown;
+            stateMachine.changeState(player.dashState);
+            return;
         }
     }
 

@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
 
+    [Header("dash")]
     [SerializeField] public float dashSpeed = 10f;
     [SerializeField] public float dashDuration = 10f;
+    public float dashDir;
 
     public float MoveSpeed => moveSpeed;
     public float JumpForce => jumpForce;
