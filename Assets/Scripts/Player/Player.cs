@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System.Collections;
 using UnityEditor.Experimental;
 using UnityEngine;
 
@@ -69,6 +70,7 @@ public class Player : MonoBehaviour
 
     #region Attack
     public void AnimationTrigger() => StateMachine.currentState.AnimationFinishTrigger();
+    public bool isBusy {  get; private set; }
 
     #endregion
 
@@ -110,5 +112,17 @@ public class Player : MonoBehaviour
         {
             Timer = coolDown;
         }
+       
     }
+
+    public IEnumerator busyFor(float _seconds)
+    {
+        isBusy = true;
+        yield return new WaitForSeconds(_seconds);
+        isBusy = false;
+    }
+
+
+
+
 }

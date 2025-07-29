@@ -16,12 +16,13 @@ public class PlayerMovementState : PlayerState
     {
         base.Update();
 
+        if (player.isBusy) return;
+
         Vector2 input = player.InputHandler.MoveInput;
-
         FlipCharacter(input.x);
-
-        player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed , player.RB.linearVelocity.y);
+        player.RB.linearVelocity = new Vector2(input.x * player.MoveSpeed, player.RB.linearVelocity.y);
     }
+
 
     private void FlipCharacter(float horizontalInput)
     {

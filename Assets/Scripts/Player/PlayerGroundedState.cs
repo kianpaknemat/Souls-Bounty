@@ -56,7 +56,7 @@ public class PlayerGroundedState : PlayerState
             return;
         }
 
-        if (Mathf.Abs(input.x) > 0.1f)
+        if (Mathf.Abs(input.x) > 0.1f && !player.isBusy)
         {
             SetSubState(player.MovementState);
         }
