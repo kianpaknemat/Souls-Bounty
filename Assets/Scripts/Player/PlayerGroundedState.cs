@@ -32,26 +32,27 @@ public class PlayerGroundedState : PlayerState
             return;
         }
 
-
-        #region keyboard input
         Vector2 input = player.InputHandler.MoveInput;
         bool jump = player.InputHandler.JumpPressed;
-        bool Dash = player.InputHandler.DashPressed;
-        #endregion
+        bool dash = player.InputHandler.DashPressed;
+        bool attack = player.InputHandler.AttackPressed;
 
+        if (attack)
+        {
+            stateMachine.changeState(player.FirstAttack);
+            return; 
+        }
 
         if (jump)
         {
             SetSubState(player.JumpState);
             return;
         }
-        
-        if (Dash && player.Timer < 0)
+
+        if (dash && player.Timer < 0)
         {
             player.Timer = player.coolDown;
             stateMachine.changeState(player.dashState);
-
-            
             return;
         }
 
@@ -66,6 +67,7 @@ public class PlayerGroundedState : PlayerState
 
         subState?.Update();
     }
+
 
     private void SetSubState(PlayerState newSubState)
     {

@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public PlayerAirState AirState { get; private set; }
     public PlayerGroundedState GroundedState { get; private set; }
     public PlayerWallSlideState wallSlide { get; private set; }
+
+
+    public PlayerPrimeriAttack FirstAttack { get; private set; }
     #endregion
 
     #region Movement
@@ -64,6 +67,11 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Attack
+    public void AnimationTrigger() => StateMachine.currentState.AnimationFinishTrigger();
+
+    #endregion
+
     private void Awake()
     {
         
@@ -75,6 +83,9 @@ public class Player : MonoBehaviour
         AirState = new PlayerAirState(this, StateMachine, "Jump");
         dashState = new PlayerDashState(this, StateMachine, "Dash");
         wallSlide = new PlayerWallSlideState(this, StateMachine, "WallSlide");
+
+
+        FirstAttack = new PlayerPrimeriAttack(this, StateMachine, "Attack1");
 
 
         GroundedState = new PlayerGroundedState(this, StateMachine, "");

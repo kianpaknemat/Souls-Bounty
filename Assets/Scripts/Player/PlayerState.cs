@@ -8,7 +8,7 @@ public class PlayerState
     protected Player player;
     private string animBoolName;
     protected float stateTimer;
-
+    protected bool triggerCalled;
     public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
     {
         this.player = _player;
@@ -19,6 +19,8 @@ public class PlayerState
     {
         if (!string.IsNullOrEmpty(animBoolName))
             player.Anim.SetBool(animBoolName, true);
+
+        triggerCalled = false;
     }
     public virtual void PhysicsUpdate() { }
 
@@ -33,6 +35,11 @@ public class PlayerState
     {
         if (!string.IsNullOrEmpty(animBoolName))
             player.Anim.SetBool(animBoolName, false);
+    }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
     }
 
 
