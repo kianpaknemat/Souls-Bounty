@@ -33,6 +33,10 @@ public class PlayerAirState : PlayerState
             stateMachine.changeState(player.dashState);
             return;
         }
+
+        if(player.IsWall()){
+            stateMachine.changeState(player.wallSlide);
+        }
     }
 
     private void FlipCharacter(float horizontalInput)

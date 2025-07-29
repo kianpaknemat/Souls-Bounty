@@ -8,8 +8,14 @@ public class PlayerInputHandler : MonoBehaviour
     private bool jumpPressed;
     private bool dashPressed;
 
+
+    private bool jumpUsed;
+
     public Vector2 MoveInput => moveInput;
-    public bool JumpPressed => jumpPressed;
+
+
+    public bool JumpPressed => jumpPressed && !jumpUsed;
+
     public bool DashPressed => dashPressed;
 
     private void Awake()
@@ -24,13 +30,17 @@ public class PlayerInputHandler : MonoBehaviour
             moveInput = Vector2.zero;
         };
 
-        inputActions.Player.Jump.performed += ctx => jumpPressed = true;
-        inputActions.Player.Jump.canceled += ctx => jumpPressed = false;
-
+        inputActions.Player.Jump.performed += ctx => {
+            jumpPressed = true;
+            jumpUsed = false;  
+        };
+        inputActions.Player.Jump.canceled += ctx => {
+            jumpPressed = false;
+            jumpUsed = false;  
+        };
 
         inputActions.Player.Dash.performed += ctx => dashPressed = true;
         inputActions.Player.Dash.canceled += ctx => dashPressed = false;
-        
     }
 
     private void OnEnable() => inputActions?.Enable();
@@ -39,5 +49,10 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDestroy()
     {
         inputActions?.Dispose();
+    }
+
+    public void SetJumpUsed()
+    {
+        jumpUsed = true;
     }
 }

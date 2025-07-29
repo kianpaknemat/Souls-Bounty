@@ -36,11 +36,21 @@ public class PlayerDashState : PlayerState
     {
         base.Update();
 
+        stateTimer -= Time.deltaTime;
+
+        if (player.IsWall())
+        {
+            player.RB.linearVelocity = Vector2.zero;
+
+            if (player.IsGrounded())
+                stateMachine.changeState(player.GroundedState);
+            else
+                stateMachine.changeState(player.wallSlide);
+
+            return;
+        }
 
         player.RB.linearVelocity = dashDir;
-
-
-        stateTimer -= Time.deltaTime;
 
         if (stateTimer <= 0f)
         {
@@ -50,6 +60,8 @@ public class PlayerDashState : PlayerState
                 stateMachine.changeState(player.AirState);
         }
     }
+
+
 
     public override void Exit()
     {

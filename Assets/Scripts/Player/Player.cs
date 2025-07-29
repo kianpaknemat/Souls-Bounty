@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerAirState AirState { get; private set; }
     public PlayerGroundedState GroundedState { get; private set; }
+    public PlayerWallSlideState wallSlide { get; private set; }
     #endregion
 
     #region Movement
@@ -23,6 +26,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
+    public float WallJumpHorizontalForce = 6f;
+
 
     [Header("dash")]
     [SerializeField] public float dashSpeed = 10f;
@@ -47,7 +52,8 @@ public class Player : MonoBehaviour
     public LayerMask walldLayer;
     public bool IsWall()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, walldLayer);
+        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        return Physics2D.Raycast(wallCheck.position, direction, wallCheckRadius, walldLayer);
     }
     #endregion
 
@@ -68,6 +74,7 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, "Jump");
         AirState = new PlayerAirState(this, StateMachine, "Jump");
         dashState = new PlayerDashState(this, StateMachine, "Dash");
+        wallSlide = new PlayerWallSlideState(this, StateMachine, "WallSlide");
 
 
         GroundedState = new PlayerGroundedState(this, StateMachine, "");
@@ -78,14 +85,13 @@ public class Player : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         InputHandler = GetComponent<PlayerInputHandler>();
-        Anim = GetComponentInChildren<Animator>();
-
+        Anim = GetComponentInChildren<Animator>();     
         StateMachine.initialize(GroundedState);
     }
 
-
+  
     private void Update()
-    {
+    {           
         StateMachine.currentState.Update();
         bool Dash = InputHandler.DashPressed;
         Timer -= Time.deltaTime;
