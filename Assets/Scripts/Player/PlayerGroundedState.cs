@@ -42,12 +42,14 @@ public class PlayerGroundedState : PlayerState
             stateMachine.changeState(player.FirstAttack);
             return; 
         }
+        
 
         if (jump)
         {
             SetSubState(player.JumpState);
             return;
         }
+        
 
         if (dash && player.Timer < 0)
         {
@@ -55,6 +57,7 @@ public class PlayerGroundedState : PlayerState
             stateMachine.changeState(player.dashState);
             return;
         }
+ 
 
         if (Mathf.Abs(input.x) > 0.1f && !player.isBusy)
         {

@@ -24,6 +24,8 @@ public class PlayerMovementState : PlayerState
     }
 
 
+
+
     private void FlipCharacter(float horizontalInput)
     {
         if (horizontalInput < 0)

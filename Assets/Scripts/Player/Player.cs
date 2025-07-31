@@ -3,11 +3,9 @@ using System.Collections;
 using UnityEditor.Experimental;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    #region Components
-    public Animator Anim { get; private set; }
-    #endregion
+    
 
     #region States
     public PlayerStateMachine StateMachine { get; private set; }
@@ -24,7 +22,7 @@ public class Player : MonoBehaviour
 
     #region Movement
     [Header("movement")]
-    public Rigidbody2D RB { get; private set; }
+
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerDashState dashState { get; private set; }
 
@@ -42,31 +40,8 @@ public class Player : MonoBehaviour
     public float JumpForce => jumpForce;
     #endregion
 
-    #region check
-    [Header("check wall & ground")]
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;
-    public bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-    public Transform wallCheck;
-    public float wallCheckRadius = 0.2f;
-    public LayerMask walldLayer;
-    public bool IsWall()
-    {
-        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-        return Physics2D.Raycast(wallCheck.position, direction, wallCheckRadius, walldLayer);
-    }
-    #endregion
+    
 
-    #region time
-    [Header("Time")]
-    public float Timer;
-    public float coolDown = 5f;
-
-    #endregion
 
     #region Attack
     public void AnimationTrigger() => StateMachine.currentState.AnimationFinishTrigger();
@@ -74,8 +49,9 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         
         StateMachine = new PlayerStateMachine();
 
@@ -94,17 +70,18 @@ public class Player : MonoBehaviour
 
     }
 
-    private void Start()
+    protected override void Start()
     {
-        RB = GetComponent<Rigidbody2D>();
+        base.Start();
         InputHandler = GetComponent<PlayerInputHandler>();
-        Anim = GetComponentInChildren<Animator>();     
+             
         StateMachine.initialize(GroundedState);
     }
 
   
-    private void Update()
+    protected override void Update()
     {           
+        base .Update();
         StateMachine.currentState.Update();
         bool Dash = InputHandler.DashPressed;
         Timer -= Time.deltaTime;

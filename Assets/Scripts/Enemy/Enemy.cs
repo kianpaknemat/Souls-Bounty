@@ -1,16 +1,25 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
+
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Move")]
+    public float moveSpeed;
+    public float IdleTime;
+
+    public EnemyStateMachin stateMachin;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        stateMachin = new EnemyStateMachin();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
+        stateMachin.currentState.Update();
     }
+
+
 }

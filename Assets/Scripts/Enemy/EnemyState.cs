@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyState
 {
     protected EnemyStateMachin stateMachin;
-    protected Enemy enemy;
+    protected Enemy enemyBase;
     protected bool triggerCalled;
     protected string animBoolName;
     protected float startTimer;
@@ -11,9 +11,9 @@ public class EnemyState
 
 
 
-    public EnemyState(Enemy _enemy, EnemyStateMachin _enemyStateMachin, string _animBoolName)
+    public EnemyState(Enemy _enemyBase, EnemyStateMachin _enemyStateMachin, string _animBoolName)
     {
-        this.enemy = _enemy;
+        this.enemyBase = _enemyBase;
         this.stateMachin = _enemyStateMachin;
         this.animBoolName = _animBoolName;
         
@@ -21,8 +21,10 @@ public class EnemyState
     public virtual void Enter()
     {
         triggerCalled = false;
+        enemyBase.Anim.SetBool(animBoolName, true);
 
     }
+
 
 
     public virtual void Update()
@@ -33,5 +35,6 @@ public class EnemyState
 
     public virtual void Exit() 
     {
+        enemyBase.Anim.SetBool(animBoolName, false);
     }
 }
