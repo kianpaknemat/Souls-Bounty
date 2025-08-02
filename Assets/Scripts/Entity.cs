@@ -22,6 +22,8 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
+
+
     #region Components
     public Animator Anim { get; private set; }
     public Rigidbody2D RB { get; private set; }
