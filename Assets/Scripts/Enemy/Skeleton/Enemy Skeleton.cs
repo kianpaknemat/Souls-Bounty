@@ -6,12 +6,14 @@ public class EnemySkeleton : Enemy
     #region States
     public SkeletonIdle idleState { get; private set; }
     public SkeletonMove moveState { get; private set; }
+    public SkeletonBattleState battleState { get; private set; }
     protected override void Awake()
     #endregion
     {
         base.Awake();
         idleState = new SkeletonIdle(this, stateMachin, "Idle", this);
         moveState = new SkeletonMove(this, stateMachin, "Move", this);
+        battleState = new SkeletonBattleState(this, stateMachin, "Move", this);
     }
 
     protected override void Start()

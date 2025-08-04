@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class SkeletonIdle : EnemyState
+public class SkeletonIdle : SkeletonGroundedState
 {
-    EnemySkeleton enemy;
-    float waitTime;
-    public SkeletonIdle(Enemy _enemyBase, EnemyStateMachin _enemyStateMachin, string _animBoolName, EnemySkeleton _enemy
-        ) : base(_enemyBase, _enemyStateMachin, _animBoolName)
+    public SkeletonIdle(Enemy _enemyBase, EnemyStateMachin _enemyStateMachin, string _animBoolName, EnemySkeleton enemy) : base(_enemyBase, _enemyStateMachin, _animBoolName, enemy)
     {
-        enemy = _enemy;
     }
+
+
+
+    float waitTime;
 
     public override void Enter()
     {

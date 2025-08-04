@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 107113248}
   - component: {fileID: 107113250}
   - component: {fileID: 107113249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685105223}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8175,7 +8175,7 @@ GameObject:
   - component: {fileID: 1792461347}
   - component: {fileID: 1792461349}
   - component: {fileID: 1792461348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9029,7 +9029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099122739}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
