@@ -39,4 +39,10 @@ public class EnemyState
     {
         enemyBase.Anim.SetBool(animBoolName, false);
     }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
+
+    }
 }

@@ -8,10 +8,15 @@ public class Enemy : Entity
     [Header("Move")]
     public float moveSpeed;
     public float IdleTime;
+    
+    
 
 
     [Header("Attack Info")]
     public float AttackDistance;
+    public float attackCollDown;
+    [HideInInspector] public float lastAttackTime;
+    public float battleTime;
 
     public EnemyStateMachin stateMachin;
 
@@ -39,7 +44,7 @@ public class Enemy : Entity
         else if (x < 0)
             transform.localScale = new Vector3(-1, 1, 1);
     }
-    public void ZeroVelocity()
+    public void SetZeroVelocity()
     {
         if (RB != null)
             RB.linearVelocity = Vector2.zero;
@@ -58,4 +63,7 @@ public class Enemy : Entity
 
     public virtual RaycastHit2D isPlayerDetected() =>
         Physics2D.Raycast(wallCheck.position, Vector2.right * direction, 50, whatIsPlayer);
+
+
+    public virtual void AnimationFinishTrigger() => stateMachin.currentState.AnimationFinishTrigger();
 }
