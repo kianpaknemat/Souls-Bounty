@@ -1,46 +1,35 @@
 using UnityEngine;
-
 public class SkeletonIdle : SkeletonGroundedState
 {
-    public SkeletonIdle(Enemy _enemyBase, EnemyStateMachin _enemyStateMachin, string _animBoolName, EnemySkeleton enemy) : base(_enemyBase, _enemyStateMachin, _animBoolName, enemy)
+    public SkeletonIdle(Enemy enemyBase, EnemyStateMachin enemyStateMachin, string animBoolName, EnemySkeleton enemy) : base(enemyBase, enemyStateMachin, animBoolName, enemy)
     {
     }
-
-
-
     float waitTime;
-
     public override void Enter()
     {
         base.Enter();
         waitTime = enemy.IdleTime;
     }
-
     public override void Exit()
     {
         base.Exit();
     }
-
     public override void Update()
     {
         base.Update();
 
-        float playerDistance = Vector2.Distance(enemy.transform.position, player.position);
-        float detectionRange = 1f; 
+        var hit = enemy.isPlayerDetected();
 
-        if (playerDistance > detectionRange)
+        if (hit.collider != null)
         {
-            waitTime -= Time.deltaTime;
-            if (waitTime < 0f)
-            {
-                stateMachin.changeState(enemy.moveState);
-            }
+            stateMachin.changeState(enemy.battleState);
+            return;
         }
-        else
+
+        waitTime -= Time.deltaTime;
+        if (waitTime <= 0f)
         {
-            waitTime = enemy.IdleTime;
+            stateMachin.changeState(enemy.moveState);
         }
     }
-
-
 }
