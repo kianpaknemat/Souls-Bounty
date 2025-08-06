@@ -1,9 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 
 {
     #region check wall, ground
+    [Header("KnockBack info")]
+    [SerializeField] protected Vector2 knockBackDirection;
+    protected bool isKnocked;
+
+
     [Header("check wall & ground")]
     public Transform attackCheck;
     public float attackCheckRadius;
@@ -57,11 +63,53 @@ public class Entity : MonoBehaviour
     public virtual void Damage()
     {
         FX.StartCoroutine("FlashFX");
-        Debug.Log(gameObject.name + " Was Damage.");
+        StartCoroutine("hitKnockBack");
     }
+
     public virtual void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
+    }
+
+    public void SetVelocity(float x, float y)
+    {
+        if (isKnocked)
+        {
+            return;
+        }
+        if (RB != null)
+            RB.linearVelocity = new Vector2(x, y);
+
+        if (x > 0)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (x < 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+    }
+    public void SetZeroVelocity()
+    {
+        if (isKnocked)
+            { return; }
+
+        if (RB != null)
+            RB.linearVelocity = Vector2.zero;
+    }
+
+
+    public float GetDirection()
+    {
+        return Mathf.Sign(transform.localScale.x);
+    }
+
+    protected virtual IEnumerator hitKnockBack()
+    {
+        isKnocked = true;
+        float dir = GetDirection();
+
+        RB.linearVelocity = new Vector2(knockBackDirection.x * -dir, knockBackDirection.y);
+
+        yield return new WaitForSeconds(0.07f); 
+
+        isKnocked = false;
     }
 
 }

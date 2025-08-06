@@ -8,8 +8,10 @@ public class Enemy : Entity
     [Header("Move")]
     public float moveSpeed;
     public float IdleTime;
-    
-    
+
+    [Header("stunned info")]
+    public float stunDuretion;
+    public Vector2 standirection;
 
 
     [Header("Attack Info")]
@@ -19,6 +21,7 @@ public class Enemy : Entity
     public float battleTime;
 
     public EnemyStateMachin stateMachin;
+    public float dir;
 
     protected override void Awake()
     {
@@ -30,25 +33,11 @@ public class Enemy : Entity
     {
         base.Update();
         stateMachin.currentState.Update();
-        direction = Mathf.Sign(transform.localScale.x);
+        dir = GetDirection();
 
         RaycastHit2D hit = isPlayerDetected();
     }
-    public void SetVelocity(float x, float y)
-    {
-        if (RB != null)
-            RB.linearVelocity = new Vector2(x, y);    
 
-        if (x > 0)
-            transform.localScale = new Vector3(1, 1, 1);  
-        else if (x < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
-    }
-    public void SetZeroVelocity()
-    {
-        if (RB != null)
-            RB.linearVelocity = Vector2.zero;
-    }
 
 
 
