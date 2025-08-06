@@ -24,10 +24,23 @@ public class SkeletonIdle : SkeletonGroundedState
     public override void Update()
     {
         base.Update();
-        waitTime -= Time.deltaTime;
-        if (waitTime < 0f)
+
+        float playerDistance = Vector2.Distance(enemy.transform.position, player.position);
+        float detectionRange = 1f; 
+
+        if (playerDistance > detectionRange)
         {
-            stateMachin.changeState(enemy.moveState);
+            waitTime -= Time.deltaTime;
+            if (waitTime < 0f)
+            {
+                stateMachin.changeState(enemy.moveState);
+            }
+        }
+        else
+        {
+            waitTime = enemy.IdleTime;
         }
     }
+
+
 }

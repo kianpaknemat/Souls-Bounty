@@ -50,20 +50,18 @@ public class SkeletonBattleState : EnemyState
             }
         }
 
-        int moveDir = player.position.x > enemy.transform.position.x ? 1 : -1;
+        float playerDistance = Vector2.Distance(enemy.transform.position, player.position);
 
-        if (Vector2.Distance(enemy.transform.position, player.position) < enemy.AttackDistance)
+        if (playerDistance > enemy.AttackDistance && playerDistance < 10)
         {
-            enemy.SetZeroVelocity();
+            int moveDir = player.position.x > enemy.transform.position.x ? 1 : -1;
+            enemy.SetVelocity(enemy.moveSpeed * moveDir, enemy.RB.linearVelocity.y);
         }
         else
         {
-            enemy.SetVelocity(enemy.moveSpeed * moveDir, enemy.RB.linearVelocity.y);
+            enemy.SetZeroVelocity();
         }
-    }
-
-
-
+     }
 
 
     public override void Exit()

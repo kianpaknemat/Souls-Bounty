@@ -5,6 +5,8 @@ public class Entity : MonoBehaviour
 {
     #region check wall, ground
     [Header("check wall & ground")]
+    public Transform attackCheck;
+    public float attackCheckRadius;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
@@ -48,6 +50,15 @@ public class Entity : MonoBehaviour
     protected virtual void Update()
     {
 
+    }
+
+    public virtual void Damage()
+    {
+        Debug.Log(gameObject.name + " Was Damage.");
+    }
+    public virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 
 }

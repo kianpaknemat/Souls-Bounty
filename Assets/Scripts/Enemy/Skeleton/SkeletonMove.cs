@@ -8,13 +8,14 @@ public class SkeletonMove : SkeletonGroundedState
     }
 
     bool isWaiting = false;
-    float waitTimer = 0f;
+    float waitTimer;
 
     public override void Enter()
     {
         base.Enter();
         isWaiting = false;
         waitTimer = 0f;
+
     }
 
     public override void Update()

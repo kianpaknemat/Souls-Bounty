@@ -37,7 +37,7 @@ public class Enemy : Entity
     public void SetVelocity(float x, float y)
     {
         if (RB != null)
-            RB.linearVelocity = new Vector2(x, y);
+            RB.linearVelocity = new Vector2(x, y);    
 
         if (x > 0)
             transform.localScale = new Vector3(1, 1, 1);  
