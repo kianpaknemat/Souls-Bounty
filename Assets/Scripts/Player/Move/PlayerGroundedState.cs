@@ -49,11 +49,10 @@ public class PlayerGroundedState : PlayerState
             SetSubState(player.JumpState);
             return;
         }
-        
 
-        if (dash && player.Timer < 0)
+
+        if (dash && SkillManagar.instance.dash.canUseSkill())
         {
-            player.Timer = player.coolDown;
             stateMachine.changeState(player.dashState);
             return;
         }

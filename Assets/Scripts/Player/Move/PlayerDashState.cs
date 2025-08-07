@@ -70,7 +70,6 @@ public class PlayerDashState : PlayerState
 
         player.Anim.SetBool("Dash", false);
 
-
         player.RB.gravityScale = 1;
 
         player.RB.linearVelocity = new Vector2(0, player.RB.linearVelocity.y);

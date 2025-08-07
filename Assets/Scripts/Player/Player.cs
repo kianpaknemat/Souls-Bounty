@@ -15,21 +15,17 @@ public class Player : Entity
     public PlayerAirState AirState { get; private set; }
     public PlayerGroundedState GroundedState { get; private set; }
     public PlayerWallSlideState wallSlide { get; private set; }
-
-
+    public PlayerInputHandler InputHandler { get; private set; }
+    public PlayerDashState dashState { get; private set; }
     public PlayerPrimeriAttack FirstAttack { get; private set; }
     #endregion
 
     #region Movement
     [Header("movement")]
 
-    public PlayerInputHandler InputHandler { get; private set; }
-    public PlayerDashState dashState { get; private set; }
-
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
     public float WallJumpHorizontalForce = 6f;
-
 
     [Header("dash")]
     [SerializeField] public float dashSpeed = 10f;
