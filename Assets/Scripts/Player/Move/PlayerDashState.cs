@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Windows;
 
 public class PlayerDashState : PlayerState
@@ -14,7 +15,9 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
+
         player.Anim.SetBool("Dash", true);
+        SkillManagar.instance.CloneSkill.createClone(player.transform);
         float dir = player.dashDir;
         Vector2 input = player.InputHandler.MoveInput;
         dir = input.x;
