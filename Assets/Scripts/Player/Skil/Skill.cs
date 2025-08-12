@@ -19,7 +19,6 @@ public class Skill : MonoBehaviour
             coolDownTimer = collDown;
             return true;
         }
-        Debug.Log("is in cool down time!");
         return false;
     }
 

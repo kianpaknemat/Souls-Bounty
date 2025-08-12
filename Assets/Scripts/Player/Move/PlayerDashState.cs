@@ -15,9 +15,9 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
+        player.skill.Clone.createClone(player.transform);
 
         player.Anim.SetBool("Dash", true);
-        SkillManagar.instance.CloneSkill.createClone(player.transform);
         float dir = player.dashDir;
         Vector2 input = player.InputHandler.MoveInput;
         dir = input.x;
@@ -29,11 +29,11 @@ public class PlayerDashState : PlayerState
 
         dashDir = new Vector2(dir * player.dashSpeed, 0f);
 
-
         player.RB.gravityScale = 0;
 
         stateTimer = player.dashDuration;
     }
+
 
     public override void Update()
     {
@@ -77,4 +77,7 @@ public class PlayerDashState : PlayerState
 
         player.RB.linearVelocity = new Vector2(0, player.RB.linearVelocity.y);
     }
+
+
+   
 }

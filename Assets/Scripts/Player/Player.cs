@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class Player : Entity
 {
+
+
+
     
 
     #region States
     public PlayerStateMachine StateMachine { get; private set; }
+    public SkillManagar skill { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMovementState MovementState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
@@ -70,6 +74,7 @@ public class Player : Entity
     {
         base.Start();
         InputHandler = GetComponent<PlayerInputHandler>();
+        skill = SkillManagar.instance;
              
         StateMachine.initialize(GroundedState);
     }

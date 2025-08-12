@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class CloneSkill : Skill
 {
+    [Header("Clone Info")]
     [SerializeField] private GameObject clonePrefab;
+    [SerializeField] private float cloneDurition;
+
+    [Space]
+
+    [SerializeField] private bool canAttack;
 
     public void createClone(Transform clonePosition)
     {
@@ -13,7 +19,7 @@ public class CloneSkill : Skill
         }
 
         GameObject newClone = Instantiate(clonePrefab);
-        newClone.GetComponent<CloneSkillController>().setUpClone(clonePosition);
-        
+        newClone.GetComponent<CloneSkillController>().setUpClone(clonePosition, cloneDurition, canAttack);
+
     }
 }

@@ -7,6 +7,5 @@ public class DashSkill : Skill
     {
         base.useSkill();
 
-        Debug.Log("we cloon a woman behind of us, that's awsome.");
     }
 }
