@@ -7,4 +7,11 @@ public class SwordSkill : Skill
     [SerializeField] private Vector2 SwordDirection;
     [SerializeField] protected float SwordGravity;
 
+
+    public void CreateSword()
+    {
+        GameObject newSword = Instantiate(SwordPrifab,player.transform.position,transform.rotation);
+        SwordSkillControler newSwordScipt = newSword.GetComponent<SwordSkillControler>();
+        newSwordScipt.setUpSword(SwordDirection,SwordGravity);
+    }
 }

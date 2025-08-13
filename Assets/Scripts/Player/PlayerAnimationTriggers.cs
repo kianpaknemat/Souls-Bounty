@@ -19,5 +19,10 @@ public class PlayerAnimationTriggers : MonoBehaviour
             }
         }
     }
+
+    private void ThorowSword()
+    {
+        SkillManagar.instance.Sword.CreateSword();
+    }
 }
 
