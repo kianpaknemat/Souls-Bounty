@@ -36,6 +36,7 @@ public class PlayerGroundedState : PlayerState
         bool jump = player.InputHandler.JumpPressed;
         bool dash = player.InputHandler.DashPressed;
         bool attack = player.InputHandler.AttackPressed;
+        bool AimThrow = player.InputHandler.SwordThrow;
 
         if (attack)
         {

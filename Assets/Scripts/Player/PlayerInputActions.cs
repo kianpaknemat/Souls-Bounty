@@ -159,7 +159,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -186,6 +186,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""counterAttack"",
                     ""type"": ""Button"",
                     ""id"": ""35a04011-7aeb-4ebd-847d-35a4a9ec3195"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwordThrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""2735e938-0fd8-441b-bd21-608319d6416f"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -597,6 +606,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""counterAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8a8d544-a06b-439c-8423-aaba7b498725"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwordThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1195,6 +1215,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_counterAttack = m_Player.FindAction("counterAttack", throwIfNotFound: true);
+        m_Player_SwordThrow = m_Player.FindAction("SwordThrow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1299,6 +1320,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_counterAttack;
+    private readonly InputAction m_Player_SwordThrow;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1354,6 +1376,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/counterAttack".
         /// </summary>
         public InputAction @counterAttack => m_Wrapper.m_Player_counterAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwordThrow".
+        /// </summary>
+        public InputAction @SwordThrow => m_Wrapper.m_Player_SwordThrow;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1413,6 +1439,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @counterAttack.started += instance.OnCounterAttack;
             @counterAttack.performed += instance.OnCounterAttack;
             @counterAttack.canceled += instance.OnCounterAttack;
+            @SwordThrow.started += instance.OnSwordThrow;
+            @SwordThrow.performed += instance.OnSwordThrow;
+            @SwordThrow.canceled += instance.OnSwordThrow;
         }
 
         /// <summary>
@@ -1457,6 +1486,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @counterAttack.started -= instance.OnCounterAttack;
             @counterAttack.performed -= instance.OnCounterAttack;
             @counterAttack.canceled -= instance.OnCounterAttack;
+            @SwordThrow.started -= instance.OnSwordThrow;
+            @SwordThrow.performed -= instance.OnSwordThrow;
+            @SwordThrow.canceled -= instance.OnSwordThrow;
         }
 
         /// <summary>
@@ -1834,6 +1866,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCounterAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwordThrow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwordThrow(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

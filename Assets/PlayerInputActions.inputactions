@@ -73,7 +73,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,6 +100,15 @@
                     "name": "counterAttack",
                     "type": "Button",
                     "id": "35a04011-7aeb-4ebd-847d-35a4a9ec3195",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwordThrow",
+                    "type": "Button",
+                    "id": "2735e938-0fd8-441b-bd21-608319d6416f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -511,6 +520,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "counterAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8a8d544-a06b-439c-8423-aaba7b498725",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwordThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

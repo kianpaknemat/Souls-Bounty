@@ -22,6 +22,9 @@ public class Player : Entity
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerPrimeriAttack FirstAttack { get; private set; }
+
+    public PlayerAimSwordState AimSword { get;private set; }
+    public playerCatchSwordState catchSword { get; private set; }
     #endregion
 
     #region Movement
@@ -63,7 +66,10 @@ public class Player : Entity
         wallSlide = new PlayerWallSlideState(this, StateMachine, "WallSlide");
 
 
-        FirstAttack = new PlayerPrimeriAttack(this, StateMachine, "Attack1");
+        FirstAttack = new PlayerPrimeriAttack(this, StateMachine, "Attack");
+
+        AimSword = new PlayerAimSwordState(this, StateMachine, "AimSword");
+        catchSword = new playerCatchSwordState(this, StateMachine, "CatchSword");
 
 
         GroundedState = new PlayerGroundedState(this, StateMachine, "");
