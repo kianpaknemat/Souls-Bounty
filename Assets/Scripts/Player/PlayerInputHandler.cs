@@ -10,7 +10,7 @@ public class PlayerInputHandler : MonoBehaviour
     private bool jumpUsed;
     private bool counterAttackPressed;
     private bool attackPressed;
-    private bool SwordThrowPressed;
+    private bool swordThrowPressed;
 
     public Vector2 MoveInput => moveInput;
 
@@ -22,7 +22,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool AttackPressed => attackPressed;
 
     public bool CounterAttack => counterAttackPressed;
-    public bool SwordThrow => SwordThrowPressed;
+    public bool SwordThrowPressed => swordThrowPressed;
 
     private void Awake()
     {
@@ -58,8 +58,9 @@ public class PlayerInputHandler : MonoBehaviour
         inputActions.Player.counterAttack.performed += ctx => counterAttackPressed = true;
         inputActions.Player.counterAttack.canceled += ctx => counterAttackPressed = false;
 
-        inputActions.Player.SwordThrow.performed += ctx => SwordThrowPressed = true;
-        inputActions.Player.SwordThrow.performed += ctx => SwordThrowPressed = false;
+        inputActions.Player.SwordThrow.performed += ctx => swordThrowPressed = true;
+        inputActions.Player.SwordThrow.canceled += ctx => swordThrowPressed = false;
+
     }
 
     private void OnEnable() => inputActions?.Enable();

@@ -19,5 +19,12 @@ public class PlayerAimSwordState : PlayerState
     public override void Update()
     {
         base.Update();
+        bool AimThrow = player.InputHandler.SwordThrowPressed;
+
+        if (!AimThrow)
+        {
+            stateMachine.changeState(player.GroundedState);
+
+        }
     }
 }

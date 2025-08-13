@@ -5,6 +5,7 @@ public class SkillManagar : MonoBehaviour
     public static SkillManagar instance;
     public DashSkill dash { get; private set; }
     public CloneSkill Clone { get; private set; }
+    public SwordSkill Sword { get; private set; }
 
     private void Awake()
     {
@@ -31,5 +32,6 @@ public class SkillManagar : MonoBehaviour
     {
         dash = GetComponent<DashSkill>();
         Clone = GetComponent<CloneSkill>();
+        Sword = GetComponent<SwordSkill>();
     }
 }
