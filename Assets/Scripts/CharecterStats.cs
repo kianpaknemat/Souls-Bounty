@@ -5,14 +5,20 @@ public class CharecterStats : MonoBehaviour
 
     public Stat damage;
     public Stat maxHealth;
+    public Stat stregth;
 
     [SerializeField] private int currentHealth;
-    void Start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth.getValue();
     }
 
-    public void takeDamage(int _damage)
+
+    public virtual void doDamage(CharecterStats _targetStat) {
+        int totalDamagev = damage.getValue() +  stregth.getValue();
+        _targetStat.takeDamage(totalDamagev);
+    }
+    public virtual void takeDamage(int _damage)
     {
         currentHealth -= _damage;
     }

@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 3610014838794678104}
   - component: {fileID: 8665090474852443073}
   - component: {fileID: 7788988406602624324}
-  - component: {fileID: 2022344495425638782}
+  - component: {fileID: 73989653210455160}
   m_Layer: 8
   m_Name: Enemy skeleton
   m_TagString: Untagged
@@ -381,7 +381,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1350155, y: 1.6075635}
   m_EdgeRadius: 0
---- !u!114 &2022344495425638782
+--- !u!114 &73989653210455160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,6 +390,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7214488681250461374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfb4978094f19e4bbe523f069ee9fe6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac39c1f0541bb484e889ead6d8bd2519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage:
+    baseValue: 7
+    modifiers: 
+  maxHealth:
+    baseValue: 45
+    modifiers: 
+  currentHealth: 0
