@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 3610014838794678104}
   - component: {fileID: 8665090474852443073}
   - component: {fileID: 7788988406602624324}
+  - component: {fileID: 2022344495425638782}
   m_Layer: 8
   m_Name: Enemy skeleton
   m_TagString: Untagged
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd55ddd580a7e14db2e015d37341d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackDirection: {x: 3, y: 10}
+  knockBackDirection: {x: 3, y: 13}
   attackCheck: {fileID: 2715248919473936464}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 8262854807362014248}
@@ -298,15 +299,15 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  moveSpeed: 2
-  IdleTime: 2
+  moveSpeed: 3
+  IdleTime: 1
   stunDuretion: 0
   standirection: {x: 0, y: 0}
   AttackDistance: 1
-  attackCollDown: 0.4
+  attackCollDown: 0.7
   lastAttackTime: 0
   battleTime: 5
-  dir: 0
+  dir: 1
 --- !u!50 &8665090474852443073
 Rigidbody2D:
   serializedVersion: 5
@@ -380,3 +381,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1350155, y: 1.6075635}
   m_EdgeRadius: 0
+--- !u!114 &2022344495425638782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7214488681250461374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfb4978094f19e4bbe523f069ee9fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

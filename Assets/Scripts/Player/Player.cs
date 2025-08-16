@@ -43,9 +43,6 @@ public class Player : Entity
     public float JumpForce => jumpForce;
     #endregion
 
-    
-
-
     #region Attack
     public void AnimationTrigger() => StateMachine.currentState.AnimationFinishTrigger();
     public bool isBusy {  get; private set; }
@@ -106,8 +103,4 @@ public class Player : Entity
         isBusy = false;
     }
     
-
-
-
-
 }

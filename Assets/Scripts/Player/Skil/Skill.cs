@@ -36,7 +36,7 @@ public class Skill : MonoBehaviour
 
     public virtual void useSkill()
     {
-        //hello you can add some skill
+        // you can add some skill
     }
 
 }
