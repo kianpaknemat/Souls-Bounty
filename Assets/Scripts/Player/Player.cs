@@ -22,9 +22,9 @@ public class Player : Entity
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerPrimeriAttack FirstAttack { get; private set; }
-
     public PlayerAimSwordState AimSword { get;private set; }
     public playerCatchSwordState catchSword { get; private set; }
+    public PlayerDeathState deathState { get; private set; }
     #endregion
 
     #region Movement
@@ -70,7 +70,7 @@ public class Player : Entity
 
 
         GroundedState = new PlayerGroundedState(this, StateMachine, "");
-
+        deathState = new PlayerDeathState(this, StateMachine, "death");
     }
 
     protected override void Start()
@@ -101,6 +101,12 @@ public class Player : Entity
         isBusy = true;
         yield return new WaitForSeconds(_seconds);
         isBusy = false;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        StateMachine.changeState(deathState);
     }
     
 }

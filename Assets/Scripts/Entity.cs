@@ -115,4 +115,9 @@ public class Entity : MonoBehaviour
         isKnocked = false;
     }
 
+    public virtual void Die()
+    {
+
+    }
+
 }

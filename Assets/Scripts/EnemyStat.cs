@@ -3,6 +3,11 @@ using UnityEngine;
 public class EnemyStat : CharecterStats
 {
     private Enemy enemy;
+
+    public EnemyStat(Enemy enemy, PlayerStateMachine stateMachine, string animBoolName)
+    {
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -13,4 +18,9 @@ public class EnemyStat : CharecterStats
         base.takeDamage(_damage);
         enemy.DamageEffect();
     }
+    protected override void Die()
+    {
+        base.Die();
+    }
+
 }

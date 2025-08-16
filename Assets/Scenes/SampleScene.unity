@@ -8970,14 +8970,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1933161193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfb4978094f19e4bbe523f069ee9fe6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3bddf32bfde0d4288fe7b16922488f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    baseValue: 12
+    baseValue: 9
     modifiers: 
   maxHealth:
-    baseValue: 100
+    baseValue: 20
+    modifiers: 
+  strength:
+    baseValue: 0
     modifiers: 
   currentHealth: 0
 --- !u!1001 &6273114106904368007
@@ -8988,22 +8991,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2022344495425638782, guid: ac03f559aaeb7c64d8426bcb0307ff43, type: 3}
-      propertyPath: damage
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022344495425638782, guid: ac03f559aaeb7c64d8426bcb0307ff43, type: 3}
-      propertyPath: maxHealth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022344495425638782, guid: ac03f559aaeb7c64d8426bcb0307ff43, type: 3}
-      propertyPath: damage.baseValue
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2022344495425638782, guid: ac03f559aaeb7c64d8426bcb0307ff43, type: 3}
-      propertyPath: maxHealth.baseValue
-      value: 35
-      objectReference: {fileID: 0}
     - target: {fileID: 7214488681250461374, guid: ac03f559aaeb7c64d8426bcb0307ff43, type: 3}
       propertyPath: m_Name
       value: Enemy skeleton

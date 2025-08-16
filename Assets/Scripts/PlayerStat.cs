@@ -13,4 +13,10 @@ public class PlayerStat : CharecterStats
         base.takeDamage(_damage);
         player.DamageEffect();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        player.Die();
+    }
 }

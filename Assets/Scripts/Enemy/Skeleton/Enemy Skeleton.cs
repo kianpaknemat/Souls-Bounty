@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class EnemySkeleton : Enemy
@@ -8,6 +9,7 @@ public class EnemySkeleton : Enemy
     public SkeletonMove moveState { get; private set; }
     public SkeletonBattleState battleState { get; private set; }
     public SkeletonAttackState AttackState { get; private set; }
+    public SkeletonDeath death { get; private set; }
 
     protected override void Awake()
     #endregion
@@ -29,5 +31,10 @@ public class EnemySkeleton : Enemy
     {
         base.Update();
         
+    }
+    public override void Die()
+    {
+        base.Die();
+
     }
 }
